@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        html{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
+        }
+
+         body{
+            flex:1;
+            display: flex;
+             align-items: center;
+             height: 60vh;
+            }
+
+        #containerbox{
+            display: flex;
+            overflow-x: auto;
+            height: 300px;
+            background-color: burlywood;
+        }
+
+        img{
+          width: 200px;
+          height: 300px;
+          margin: 50px;  
+        }
+        
+        #containerbox >div >p{
+            height: 20px;
+            font-size: small;
+            font-weight: bolder;
+            margin-top: -10px;
+        }
+
+        #containerbox >div >p:nth-child(3){
+            position: relative;
+            width: 100px;
+            height: 20px;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            margin-top: -337px;  
+            margin-left: 50px;  
+        }
+        
+        #showdata{
+            display: grid;
+            grid-template-columns: auto auto;
+            margin: auto;
+        }
+        #showdata > div{
+            margin: auto;
+        }
+        .heading{
+            background-color: aqua;
+        }
+        img{
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            padding: 5px;
+        }
+        
+
+    </style>
+</head>
+<body>
+        <div>
+            <div class="heading">
+                <h2>Currently Trending Movies</h2>
+            </div>
+            <div id="containerbox">
+            </div>
+        </div>
+        <div>
+            <div id="showdata">
+            </div>
+    </div>
+        
+    <script>
+       let parent=document.getElementById("containerbox")
+        async function f(){
+         let res=await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=5b9d11ecd78af801eff03c6428c1b2d1`)
+        let data=await res.json()
+        console.log(data.results)
+        showmovie(data.results)
+        }
+
+        f()
+        function showmovie(data){
+        data.forEach(function(el){
+
+            console.log(el.title)
+            console.log(el.poster_path)
+            console.log(el.vote_average)
+            let poster_path=el.poster_path
+            let imgpath=`https://image.tmdb.org/t/p/original/${poster_path}`
+            let pdiv=document.createElement("div")
+
+            let img=document.createElement("img")
+            img.src=imgpath
+            img.onclick=function(){
+                alldata(el)
+
+            }
+            if(el.title==undefined){
+                var ptitle=document.createElement("p")
+                ptitle.innerText=el.name
+            }else{
+                var ptitle=document.createElement("p")
+                ptitle.innerText=el.title
+            }
+            
+            let pvote=document.createElement("p")
+            pvote.innerHTML="rating:<b>&#x2605</b>"+el.vote_average
+            pdiv.append(img,ptitle,pvote)
+            parent.append(pdiv)
+        });
+
+        }
+        
+        parentt=document.getElementById("showdata")
+        async function alldata(data){
+            parent.innerHTML=null;
+            console.log("showid",data)
+            let poster_path=data.poster_path
+            let imgpath=`https://image.tmdb.org/t/p/original/${poster_path}`
+            let pdiv=document.createElement("div")
+            let pdata=document.createElement("div")
+            let img=document.createElement("img")
+            img.src=imgpath
+            if(data.title==undefined){
+                var ptitle=document.createElement("p")
+                ptitle.innerText=data.name
+            }else{
+                var ptitle=document.createElement("p")
+                ptitle.innerText=data.title
+            }
+            
+            let pvote=document.createElement("p")
+            pvote.innerHTML="Rating:<b>&#x2605</b>"+data.vote_average
+
+            let mtype=document.createElement("p")
+            mtype.innerHTML="Media - Type :"+data.media_type
+
+            let origin=document.createElement("p")
+            origin.innerHTML="Original Language :"+data.original_language
+
+            let overview=document.createElement("p")
+            overview.innerHTML="Overview :"+data.overview
+
+            let original_name=document.createElement("p")
+            original_name.innerHTML="Original Movie Name:"+data.original_name
+
+            let backbtn=document.createElement("button")
+            backbtn.textContent="Refresh"
+            backbtn.onclick=function(){
+                location.reload();
+            }
+            
+            pdiv.append(img)
+            pdata.append(ptitle,mtype,origin,overview,original_name,pvote)
+            parentt.append(pdiv,pdata)
+        };
+    </script>
+</body>
+</html>
