@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Translator</title>
+</head>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+body {
+  height: 98vh;
+  width: 99vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+background-color: black;  
+  background-size: cover;
+}
+.header {
+  width: 60%;
+  margin-bottom: 20px;
+  backdrop-filter: blur(5px);
+}
+#heading {
+  color: #ffffff;
+  margin: 5px 0 5px 3%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#translate_box {
+    border: 2px solid white;  
+  width: 80%;
+  height: 50%;
+  padding: 2%;
+  box-sizing: border-box;
+  display: grid;
+  gap: 1%;
+  grid-template:
+    "a b"
+    "a b"
+    "a b"
+    "a b"
+    "a b"
+    "a b"
+    "c c";
+}
+
+#input_box {
+  grid-area: a;
+  color: white;
+}
+#input_language {
+  width: 100%;
+  height: 40px;
+  font-size: 1.2em;
+font-family: Georgia, 'Times New Roman', Times, serif;  
+font-weight: bold;
+}
+#output_language {
+    width: 100%;
+  height: 40px;
+  font-size: 1.2em;
+font-family: Georgia, 'Times New Roman', Times, serif;  
+font-weight: bold;
+}
+#output_box {
+  grid-area: b;
+}
+#button_box {
+    margin-top: 20px;
+    margin-right: 470px;
+    height: 100px;
+  grid-area: c;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.box {
+  width: 100%;
+  height: 90%;
+  padding: 4%;
+  font-size: 2em;
+  color: white;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+}
+
+
+#translate {
+  width: 10em;
+  height: 50%;
+  font-size: 1.2em;
+  padding: 1% 1% 2.5%;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  font-weight: 300;
+  color: #ffffff;
+}
+
+
+#translate:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+</style>
+
+<body>
+    <div class="header">
+        <h1 id="heading" class="color-select">Translate Your Thought With Another Language</h1>
+    </div>
+    <div id="translate_box">
+        <div class="in" id="input_box">
+            <div class="language">
+                <select name="" id="input_language">
+                    <option value="auto">Auto Detect</option>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="zh">Chinese</option>
+                    <option value="ar">Arabic</option>
+                    <option value="fr">French</option>
+                    <option value="hi">Hindi</option>
+                    <option value="ko">Korean</option>
+                    <option value="ru">Russian</option>
+                </select>
+            </div>
+            <textarea id="input" class="box"></textarea>
+        </div>
+        <div class="in" id="output_box">
+            <div class="language">
+                <select name="" id="output_language">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="zh">Chinese</option>
+                    <option value="ar">Arabic</option>
+                    <option value="fr">French</option>
+                    <option value="hi">Hindi</option>
+                    <option value="ko">Korean</option>
+                    <option value="ru">Russian</option>
+                </select>
+            </div>
+            <textarea id="output" class="box"> </textarea>
+        </div>
+        <br>
+        <div id="button_box">
+            <button id="translate"><i class="fas fa-language fa-lg"></i>Translate</button>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+
+</html>
