@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito&family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <title>Kohl's |Kohl Cart</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Nunito", sans-serif;
+        font-family: "Ubuntu", sans-serif;
+      }
+      body {
+        background-color: #e0e0e0;
+      }
+      .container {
+        width: 80%;
+        margin: auto auto;
+        height: auto;
+        margin-top: 4%;
+      }
+   
+
+      .maindiv {
+        display: grid;
+        grid-template-columns: 56% 42.5%;
+        grid-template-rows: auto;
+        grid-gap: 15px;
+        margin-top: 20px;
+      }
+      img {
+        width: 65%;
+        margin-left: 15px;
+      }
+      #product_des {
+        margin-left: 100px;
+      }
+      #items {
+        background-color: white;
+        display: grid;
+        grid-template-columns: 100%;
+        /* grid-template-rows: 50%; */
+        justify-content: space-between;
+        border: 0.5px black;
+        grid-gap: 10px;
+        border-radius: 10px;
+      }
+
+      #lists {
+        display: grid;
+        grid-template-columns: 40% 50%;
+
+        grid-gap: 5px;
+        margin-top: 10px;
+      }
+
+      #lists > div + div > p {
+        font-size: 20px;
+        font-weight: 900;
+        color: #2c2828;
+        font-family: "Nunito", sans-serif;
+        font-family: "Ubuntu", sans-serif;
+      }
+      #lists > div + div > p + div {
+        margin-top: 70px;
+      }
+      #lists > div + div > p + div > p {
+        font-size: 16px;
+        font-weight: 600;
+        color: #424242;
+      }
+
+      #lists > div + div > p + div > p + p {
+        font-size: 15px;
+        font-weight: 100;
+        color: #9e9e9e;
+        margin-top: 6px;
+      }
+
+
+    
+      #lists > div {
+        margin-left: 30px;
+        height: 200px;
+      }
+
+      /* #lists > div{
+            display: flex;
+        } */
+
+     
+
+      
+      table {
+        margin-top: 15px;
+        margin-left: 12px;
+      }
+
+      td {
+        padding-top: 5px;
+      }
+
+      #your_saving {
+        color: #c62828;
+        text-align: center;
+        margin: 25px auto;
+        font-weight: 600;
+        font-size: 20px;
+      }
+ 
+
+           .check{
+             width: 150px;
+             padding: 10px;
+             margin-top: 20px;
+             margin-left: 180px;
+             background-color: red;
+             color: white;
+             font-size: 18px;
+           }
+
+    </style>
+  </head>
+  <body>
+   
+     
+
+    <div class="container">
+      <div class="maindiv">
+        <div id="items">
+          <div id="lists"></div>
+        </div>
+        <div class="total_price">
+          <table id="amount">
+            <tr>
+              <td>Total items</td>
+              <td style="padding-left: 150px; font-weight: 600" id="d1">$0</td>
+            </tr>
+            <tr>
+            
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td style="padding-left: 150px; font-weight: 600" id="d2">$0</td>
+            </tr>
+
+            <tr>
+              <td>Estimated Tax & fees</td>
+              <td style="padding-left: 150px; font-weight: 600" id="d3">$0</td>
+            </tr>
+          </table>
+          <hr
+            style="width: 95%; border: 0.5px solid #a89898; margin: 10px auto"
+          />
+          <table style="width: 100%" id="total">
+            <tr>
+              <td style="padding-top: 0px; color: red; font-weight: bold">
+                Total
+              </td>
+              <td
+                style="padding-left: 243px; padding-top: 0px; font-weight: 600"
+                id="d4"
+              >
+                $0
+              </td>
+            </tr>
+          </table>
+          <button onclick="myFunction()" class="check">Checkout</button>
+          
+
+  </body>
+
+  <script>
+    function myFunction() {
+  alert("Your Order Is Place Wait 3 Sec");
+}
+
+    var sum = 0;
+    let parent = document.getElementById("lists");
+    let product_des = document.getElementById("product_des");
+
+    var cart = JSON.parse(localStorage.getItem("cart"));
+
+    function showProducts() {
+      cart.forEach(function (product) {
+        cart.innerHTML = null;
+        let item_div = document.createElement("div");
+
+        let img = document.createElement("img");
+        img.src = product.img;
+        let product_price = document.createElement("p");
+        product_price.textContent = "$" + product.price;
+
+        let product_name = document.createElement("p");
+        product_name.textContent = product.name;
+
+        //console.log(product.name)
+
+        let removetocart_btn = document.createElement("button");
+        removetocart_btn.innerHTML = "remove";
+        // removetocart_btn.style.margin = "20px 6px";
+        // removetocart_btn.addEventListener("click",removetoCart)
+        removetocart_btn.onclick=function(){
+          removetoCart(event,product)
+        };
+
+
+        item_div.append(img, product_price, removetocart_btn);
+        let prod_des_para = document.createElement("p");
+        let Expected_devivery = document.createElement("p");
+        Expected_devivery.innerText = "Expected devivery";
+
+        let devivery = document.createElement("P");
+        devivery.innerText = " Wed Oct 6 - Fri Oct 15";
+        let product_des = document.createElement("div");
+        prod_des_para.textContent = product.name;
+
+        let devivery_details = document.createElement("div");
+        devivery_details.append(Expected_devivery, devivery);
+
+        product_des.append(prod_des_para, devivery_details);
+
+        parent.append(item_div, product_des);
+
+        
+        sum = sum + Number(product.price);
+      });
+     
+      let total_items = cart.length;
+      let total_amount = sum + 10 + 8;
+      // let final_value = total_amount;
+
+      // let amount = document.getElementById("amount");
+      // let list = document.getElementById("list")
+      let d1 = document.getElementById("d1");
+      let d2 = document.getElementById("d2");
+      let d3 = document.getElementById("d3");
+      // let coupn = document.createElement("input");
+      // let line = document.createElement("hr")
+      let d4 = document.getElementById("d4");
+      let checkout_valu = document.getElementById("checkout_valu");
+      let coupn;
+      // let total = document.createElement("p")
+      // l2.textContent = sum;
+      d1.textContent = total_items;
+      d2.textContent = "$10";
+      d3.textContent = "$8";
+      d4.textContent = "$" + total_amount;
+      checkout_valu.textContent = " " + "$" + total_amount;
+      checkout_valu.style.color = "#FFF176";
+
+      function removetoCart(e,prod) {
+        e.preventDefault()
+
+        let newprods= cart.filter(function (p){
+          if(p!=prod){
+            return p;
+          }
+        });
+        localStorage.removeItem("cart");
+
+        localStorage.setItem("cart",JSON.stringify(newprods))
+        location.reload()
+      }
+
+      //  check & apply promocode
+
+      // list.append(l1,l2,l3,coupn,line,l5);
+      // parent.append("list");
+    }
+    function checkcode() {
+      // alert("check code")
+      let code = document.getElementById("promocode").value;
+      if (code == "WEL60") {
+        alert("Coupon Applied sucessfully");
+        let cart = JSON.parse(localStorage.getItem("cart"));
+        sum = 0;
+        cart.forEach(function (product) {
+          sum = sum + Number(product.price);
+        });
+        var mainsum = (sum * (60 / 100)).toFixed(2);
+        dis = (sum - mainsum).toFixed(2);
+        // console.log(mainsum)
+        // console.log(dis)                     //pay after discount <--- this is after discount price
+
+        let promo_btn = document.getElementById("promo_btn");
+            promo_btn.innerText = "Applied";
+
+        let checkout_valu = document.getElementById("checkout_valu");
+        checkout_valu.textContent = " " + "$" + mainsum;
+
+        d4.textContent = mainsum;
+
+        let discount = document.getElementById("discount");
+        discount.textContent = " " + "$" + dis;
+        discount.style.color = "#00796B"
+
+        let your_saving = document.getElementById("your_saving");
+        your_saving.style.color = "#00796B"
+
+
+      } else if (code == "") {
+        alert("You have'nt apply any code");
+      } else {
+        alert("Invalid Coupon code Please Check Carefully");
+      }
+    }
+
+    showProducts();
+
+
+  </script>
+</html>

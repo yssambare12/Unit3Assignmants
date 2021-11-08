@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #searchbar >div{
+            display: grid;
+            margin-top: 20px;
+            margin-left: 450px;
+            padding: 20px;
+            grid-template-columns: 50%;
+            border-bottom: 1px solid black;
+        }
+        input{
+            padding-top: 1%;
+            padding-bottom: 1%;
+            width: 80%;
+            
+        }
+        button{
+            padding-top: 1%;
+            padding-bottom: 1%;
+            background-color: aqua;
+        }
+
+        button:hover{
+            background-color: red;
+            color: white;
+        }
+        
+        #container{
+            display: grid;
+            grid-template-columns: 38% 48%;
+            row-gap: 20px;
+            margin: auto;
+            margin-left: 20%;
+            
+        }
+        #container >div {
+            /* background-color: aqua; */
+        }
+        #container >div:nth-child(n){
+            height: 290px;
+             overflow: hidden;
+             box-sizing: border-box;
+        }
+        #container img{
+            width: 90%;
+            height: 100%;
+        }
+        #cat{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+        }
+        #cat >div{
+            height: 200px;
+            overflow: hidden;
+            /* overflow-x: hidden; */
+            border: 1px solid black;
+            margin:10px;
+            padding: 20px;
+            text-align: center;
+        }
+        #cat img{
+            /* background-color: aqua; */
+            width: 95%;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+
+        }
+        a:hover{
+            color: cornflowerblue;
+        }
+        #recipediv{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap:1%;
+
+        }
+        #recipediv img{
+            width: 90%;
+            margin: 10px;
+
+        }
+        #recipediv > div{
+            display: grid;
+            grid-template-columns: 42% 55%;
+            border: 0.2px solid black;
+        }
+        #recipediv > div:hover{
+            box-shadow: 2px 2px 2px black;
+        }
+        #backbtn{
+           margin-left: 90%;
+        }
+
+        .topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: red;
+  color: white;
+}
+    </style>
+</head>
+<body>
+
+    <div class="topnav">
+        <a class="active" href="index.html">Home</a>
+        <a href="mealday.html">Special Dishes</a>
+        <a href="latest.html">Latest Recipes</a>
+        <a href="signin.html">Sign In</a>
+        <a href="signup.html">Sign Up</a>
+      </div>
+
+    <div>
+        <div id="searchbar">
+        </div>
+        
+        <div id="container"></div>
+        <div id="cat"></div>
+        <div>
+            <button id="backbtn">Back To Home</button>
+        </div>
+        <div id="recipediv">
+
+        </div>
+    </div>
+    
+</body>
+
+<script type="module">
+    import search from './components/search.js'
+    import {getData,append} from './script/showdata.js'
+    import {getcatData,appendcat} from './script/cat.js'
+    // search input
+    let searchbr=document.getElementById("searchbar")
+    searchbr.innerHTML=search()
+
+    let sbtn=document.getElementById("searchbtn")
+    sbtn.onclick=function(){
+        result()
+    }
+    function empty(){
+        let cont=document.getElementById("container")
+        cont.innerText=null;
+        let cat=document.getElementById("cat")
+        cat.innerText=null;
+    }
+   async function result(){
+        empty()
+        var searchinput=document.getElementById("searchinput").value
+        let response=await getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchinput}`)
+        let container=document.getElementById("container")
+        append(response,container)
+        
+        console.log(response)
+   }
+
+   async function homepage_cat(){
+       let response=await getcatData(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+       let cat=document.getElementById("cat")
+       var abc=appendcat(response,cat)
+        console.log(response)
+   }
+   homepage_cat()
+
+</script>
+</html>

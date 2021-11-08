@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://i.pinimg.com/originals/77/0f/0c/770f0c498fe89b1ffcfce1aaa5fc72de.jpg"
+      type="image/x-icon"
+    />
+    <title>Kohl's| Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <style>
+    
+
+    #signupContainer {
+      font-family: helvetica,arial,sans-serif;
+      width: 60%;
+      height: 370px;
+      margin: 40px auto;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      padding: 30px;
+    }
+   
+    #myform {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
+    }
+    .inpBoxSize {
+      width: 275px;
+      height: 37px;
+      border: 1px solid #ccc;
+      padding-left: 5px;
+      border-radius: 0px;
+      outline-color: rgb(37, 127, 245);
+      
+    }
+    .inptText {
+          font-weight: bolder;
+          font-size: 14px;
+          margin-top: 18px;
+          margin-bottom: 4px;
+    }
+ 
+   
+    #submitSection{
+      width: 60%;
+      margin: auto;
+      height: fit-content;
+    }
+    
+    #submitBtn{
+      cursor: pointer;
+      background-color: red;
+      font-size: 18px;
+      width: 280px;
+      color: #fff;
+      padding: 12px;
+    }
+  </style>
+  <body>
+    <!-- Create account form Starts -->
+    <div id="signupContainer">
+      <div>
+        <h2>Create Account</h2>
+        <p>
+          Create Your Account
+        </p>
+      </div>
+      <div class="signupinptBox">
+        <form name="Myform" id="myform">
+          <div>
+            <p class="inptText">First Name</p>
+            <input class="inpBoxSize" type="text" id="Fname" />
+          </div>
+          <div>
+            <p class="inptText">Last Name</p>
+            <input type="text" class="inpBoxSize" id="Lname" />
+          </div>
+          <div>
+            <p class="inptText">Email Address</p>
+            <input
+              type="email"
+              placeholder="name@mail.com"
+              class="inpBoxSize"
+              id="email"
+            />
+          
+          </div>
+          <div>
+            <p class="inptText">Password</p>
+            <input
+              type="password"
+              class="inpBoxSize"
+              placeholder="Should not be same as email or login"
+              id="password"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  
+    <div id="submitSection">
+      <div>
+       <a href="./signin.html"> <input type="submit" id="submitBtn" onclick="signup(event)" value="CREATE ACCOUNT" > </a>
+      </div>
+    </div>
+  </body>
+  <script>
+    /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
+    function myFunction() {
+      var x = document.getElementById("myLinks");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+
+    function accFunction(){
+          let y = document.getElementById("accLink");
+          if(y.style.display === "block"){
+                y.style.display = "none";
+          } else {
+                y.style.display = "block"
+          }
+    }
+
+
+    function signup(e){
+      e.preventDefault();
+      let myForm = document.getElementById("myform");
+      let Fname = myForm.Fname.value;
+      let Lname = myForm.Lname.value;
+      let email = myForm.email.value;
+      let password = myForm.password.value;
+
+      if(localStorage.getItem("users") === null){
+        localStorage.setItem("users", JSON.stringify([]))
+      }
+
+      let user = {
+      Fname,
+      Lname,
+      email,
+      password
+    };
+
+    alert("Account created sucessfully")
+
+    
+     let arr = JSON.parse(localStorage.getItem("users"))
+     arr.push(user);
+    console.log(arr)
+
+
+
+
+    localStorage.setItem("users",JSON.stringify(arr))
+     myForm.reset()
+     myForm.value = '';
+     window.location.href = "signin.html"
+    
+    } 
+
+    
+
+    //function for clicking any one reward checkbox
+    function onlyOne(checkbox){
+      let checkboxes = document.getElementsByName("rewardcheck")
+      checkboxes.forEach((item) => {
+        if(item !== checkbox) item.checked = false
+      })
+    }
+  </script>
+</html>

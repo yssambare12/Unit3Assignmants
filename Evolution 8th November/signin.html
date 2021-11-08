@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://i.pinimg.com/originals/77/0f/0c/770f0c498fe89b1ffcfce1aaa5fc72de.jpg"
+      type="image/x-icon"
+    />
+    <title>Kohl's | Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #signinContainer {
+      font-family: helvetica, arial, sans-serif;
+      width: 60%;
+      height: 500px;
+      margin: 30px auto;
+      display: flex;
+      padding: 30px;
+      border: 2px solid black;
+      justify-content: center;
+    }
+    .firstBox {
+      width: 80%;
+      height: 80%;
+      margin-right: 50px;
+    }
+    
+ 
+    .inpBoxSize {
+      width: 275px;
+      height: 37px;
+      border: 1px solid #ccc;
+      padding-left: 5px;
+      border-radius: 0px;
+      outline-color: rgb(37, 127, 245);
+    }
+    .inptText {
+          font-weight: bolder;
+          font-size: 14px;
+          margin-top: 18px;
+          margin-bottom: 4px;
+    }
+   
+    
+    #submitBtn{
+          margin-top: 25px;
+      cursor: pointer;
+      background-color:red;
+      font-size: 18px;
+      width: 280px;
+      color: #fff;
+      padding: 12px;
+    }
+  
+    #createAccBtn{
+      margin-top: 0px;
+      cursor: pointer;
+      background-color: red;
+      font-size: 18px;
+      width: 280px;
+      color: #fff;
+      padding: 12px;
+    }
+       
+  </style>
+  <body>
+       
+    <!--sign In section starts-->
+
+    <div id="signinContainer">
+      <div class="firstBox">
+        <div>
+          <h2>Sign In</h2>
+          <p class="SignIntext">
+            Sign in to your Food App account to buy some awasome food itoms
+          </p>
+        </div>
+        <div class="signInInputBox">
+          <form id="myform">
+                <div>
+                  <p class="inptText">Email Address</p>
+                  <input
+                    type="email"
+                    placeholder="name@mail.com"
+                    class="inpBoxSize"
+                    id="email"
+                  />
+                </div>
+                <div>
+                  <p class="inptText">Password</p>
+                  <input
+                    type="password"
+                    class="inpBoxSize"
+                    placeholder="Should not be same as email or login"
+                    id="password"
+                  />
+
+                </div>
+                <div>
+                  <input type="submit" id="submitBtn" onclick="signin(event)" value="SIGN IN">
+                </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Second box section -->
+
+                <div style="margin-top: 100px;">
+                  <input type="submit" id="createAccBtn" value="CREATE ACCOUNT" onclick="window.location='signup.html'";>
+                </div>
+    </div>
+  </body>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myLinks");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+
+    function accFunction(){
+          let y = document.getElementById("accLink");
+          if(y.style.display === "block"){
+                y.style.display = "none";
+          } else {
+                y.style.display = "block"
+          }
+    }
+
+    function signin(e){
+      e.preventDefault();
+      let myForm = document.getElementById("myform");
+      let email = myForm.email.value;
+      let password = myForm.password.value;
+
+      let all_users = JSON.parse(localStorage.getItem("users"))
+
+      all_users.forEach(function (user) {
+            if(email === user.email && password === user.password){
+              alert("Sign In Succesful")
+                  window.location.href = "index.html"
+                  
+            } else if (email !== user.email && password === user.password) {
+                  alert("Incorrect email!")
+            } else if (email === user.email && password !== user.password) {
+               alert("Incorrect password")
+            } else {
+              alert("Not yet register!")
+            }
+      })
+
+      alert("Sign in completed")
+    }
+  </script>
+</html>
