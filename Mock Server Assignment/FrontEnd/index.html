@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            padding: 50px;
+            gap: 2%;
+            text-align: center;
+            height: auto;
+            margin-top: 50px;
+            margin-left: 200px;
+                
+    }
+
+    .box div{
+        border: 2px solid black;
+        box-shadow: 5px 5px 5px black;
+        padding-bottom: 100px;
+        background-color:orange;
+    }
+    input{
+        margin: 10px;
+        font-size: 19px;
+    }
+    #database{
+        border: none;
+        
+    }
+    #database > div  {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        /* border: none; */
+        height: 30px;
+        border: 0.3px solid black;
+        background-color: rgb(122, 177, 172);
+
+    }
+
+    button{
+        width: 40%;
+        height: 10%;
+        background-color: white;
+    }
+
+    button:hover{
+        background-color: blue;
+        color: white;
+    }
+
+    .outerbox{
+        display: grid;
+        grid-template-columns: 70% 25%;
+    }
+    .box2 >div div{
+        border-bottom: 1px;
+    }
+
+    h6{
+        font-size: 18px;
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="outerbox">
+        <div class="box">
+            <div>
+                <h1>Add Product</h1>
+                <h6>POST request</h6>
+                <input type="text" id="id" placeholder="Id"><br>
+                <input type="text" id="name" placeholder="Name"><br>
+                <input type="number" id="price" placeholder="Price"><br>
+            
+                <button onclick="addProduct()">Add Product</button>
+            </div>
+        
+            <div>
+                <h1>Delete Product</h1>
+                <h6>DELETE request</h6>
+                <input type="text" id="pid" placeholder="Id"><br>
+                <button onclick="deleteProduct()">Delete Product</button>
+            </div>
+            <div>
+                <h1>Update Product</h1>
+                <h6>PUT request</h6>
+                <input type="text" id="putid" placeholder="Which id you want to update"><br>
+                <input type="text" id="putname" placeholder="Name"><br>
+                <input type="number" id="putprice" placeholder="Price"><br>
+        
+                <button onclick="putdata()">Update Product</button>
+            </div>
+            </div>
+            <div class="box2">
+            <div style="width: 100%;">
+                <h1>Database Data[GET request]</h1>
+                <div id="database"></div>
+            </div>
+        
+        </div>
+    </div>
+   
+    
+</body>
+<script>
+
+    async function addProduct(){
+        
+        let data={
+            id:document.getElementById("id").value,
+            name:document.getElementById("name").value,
+            price:document.getElementById("price").value,
+        };
+       let response=await fetch("http://localhost:3000/api/products",{
+           method:'POST',
+             body:JSON.stringify(data),
+        headers:{
+            "Content-Type":"application/json",
+
+        }
+    
+    })
+}
+let parent=document.getElementById("database")
+    async function getData(){
+        let res=await fetch("http://localhost:3000/api/products")
+        let data=await res.json()
+        displaydata(data)
+    }
+    function displaydata(data){
+        data.forEach((el)=>{
+            let div=document.createElement("div")
+            let d_id=document.createElement("div")
+            d_id.innerText=el.id
+            let d_name=document.createElement("div")
+            d_name.innerText=el.name
+            let d_price=document.createElement("div")
+            d_price.innerText=el.price
+            div.append(d_id,d_name,d_price)
+            parent.append(div)
+        })
+    }
+    getData()
+async function deleteProduct(){
+    let id=document.getElementById("pid").value
+    let response=await fetch(`http://localhost:3000/api/products/${id}`,{
+           method:'DELETE',
+            //  body:JSON.stringify(data),
+        headers:{
+            "Content-Type":"application/json",
+
+        }
+})
+}
+
+async function putdata(){
+    let pid=document.getElementById("putid").value
+    console.log("prod",pid)
+    let data={
+            id:document.getElementById("putid").value,
+            name:document.getElementById("putname").value,
+            price:document.getElementById("putprice").value,
+        };
+        console.log("put",data)
+       let response=await fetch(`http://localhost:3000/api/products/${pid}`,{
+           method:'PUT',
+             body:JSON.stringify(data),
+        headers:{
+            "Content-Type":"application/json",
+
+        }
+    
+    })
+}
+</script>
+</html>

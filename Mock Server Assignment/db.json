@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": 3,
+      "name": "IceCream",
+      "price": "50"
+    },
+    {
+      "id": "12",
+      "name": "water bottle",
+      "price": "20"
+    },
+    {
+      "id": 17,
+      "name": "vannila IceCream",
+      "price": "200"
+    },
+    {
+      "id": 8,
+      "name": "coffee",
+      "price": "10"
+    },
+    {
+      "id": "9",
+      "name": "Jalebi",
+      "price": "30"
+    },
+    {
+      "id": "10",
+      "name": "Milk",
+      "price": "55"
+    },
+    {
+      "id": "11",
+      "name": "tea",
+      "price": "7"
+    }
+  ]
+}
